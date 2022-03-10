@@ -1,13 +1,13 @@
 SOURCES = main.c stack_utils.c stack_operations.c \
 	ps_pushes.c ps_rotations.c ps_rrotations.c ps_swaps.c \
-	sort_utils.c
+	sort_utils.c ft_strtol.c
 PRINTF_PATH = ./ft_printf
 PRINTF = $(PRINTF_PATH)/libftprintf.a
 HEADERS = push_swap.h
 NAME = push_swap
 OBJECTS = $(SOURCES:.c=.o)
 INCLUDE_PATH = $(PRINTF_PATH) $(PRINTF_PATH)/libft
-CFLAGS = -Wall -Wextra -Werror $(addprefix -I,$(INCLUDE_PATH))
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address $(addprefix -I,$(INCLUDE_PATH))
 .PHONY: all clean fclean re bonus norm
 
 $(NAME): $(PRINTF) $(OBJECTS)
