@@ -6,7 +6,7 @@
 /*   By: lalex <lalex@students.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:54:44 by lalex             #+#    #+#             */
-/*   Updated: 2022/03/23 16:54:45 by lalex            ###   ########.fr       */
+/*   Updated: 2022/03/23 17:16:43 by lalex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		exit_failure(&stack_a, &stack_b);
-	read_commands(&stack_a, &stack_b, argv[1]);
+	read_commands(&stack_a, &stack_b, fd);
 	close(fd);
 	exit_success(&stack_a, &stack_b, !stack_b && is_sorted(stack_a));
 }
