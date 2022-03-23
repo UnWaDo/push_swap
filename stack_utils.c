@@ -62,3 +62,10 @@ void	stack_clear(t_stack **stack)
 	}
 	*stack = NULL;
 }
+
+t_stack	*locate_value(t_stack *stack, int value)
+{
+	while (stack && stack->value != value)
+		stack = stack->next;
+	return (stack);
+}

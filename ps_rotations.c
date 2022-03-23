@@ -13,23 +13,23 @@
 #include "push_swap.h"
 #include "ft_printf.h"
 
-void ra(t_stack **a, t_stack **b)
+void	ra(t_stack **a, t_stack **b)
 {
 	(void) b;
-	ft_printf("ra\n");
+	store_rotations(ADD_RA);
 	rotate(a);
 }
 
-void rb(t_stack **a, t_stack **b)
+void	rb(t_stack **a, t_stack **b)
 {
 	(void) a;
-	ft_printf("rb\n");
+	store_rotations(ADD_RB);
 	rotate(b);
 }
 
-void rs(t_stack **a, t_stack **b)
+void	rr(t_stack **a, t_stack **b)
 {
-	ft_printf("rs\n");
+	store_rotations(ADD_RA | ADD_RB);
 	rotate(a);
 	rotate(b);
 }
