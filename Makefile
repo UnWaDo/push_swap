@@ -2,15 +2,17 @@ FILENAMES_GENERAL = stack_utils.c stack_utils_add.c stack_operations.c \
 	sort_utils.c ft_strtol.c process_input.c
 FILENAMES = main.c sorter.c sorter_utils.c \
 	ps_pushes.c ps_rotations.c ps_rrotations.c ps_swaps.c
+FILENAMES_CHECKER = commands.c exits.c
 FILENAMES_BONUS = main_bonus.c
 FILENAMES_VISUAL = visual.c
 SOURCES_GENERAL = $(addprefix ./srcs/general/,$(FILENAMES_GENERAL))
 SOURCES = $(addprefix ./srcs/main/,$(FILENAMES)) $(SOURCES_GENERAL)
-SOURCES_BONUS = $(addprefix ./srcs/bonus/,$(FILENAMES_BONUS)) $(SOURCES_GENERAL)
-SOURCES_VISUAL = $(addprefix ./srcs/visual/,$(FILENAMES_VISUAL)) $(SOURCES_GENERAL)
+SOURCES_CHECKER = $(addprefix ./srcs/bonus/,$(FILENAMES_CHECKER))
+SOURCES_BONUS = $(addprefix ./srcs/bonus/,$(FILENAMES_BONUS)) $(SOURCES_GENERAL) $(SOURCES_CHECKER)
+SOURCES_VISUAL = $(addprefix ./srcs/visual/,$(FILENAMES_VISUAL)) $(SOURCES_GENERAL) $(SOURCES_CHECKER)
 PRINTF_PATH = ./ft_printf
 PRINTF = $(PRINTF_PATH)/libftprintf.a
-FILENAMES_HEADERS = push_swap.h push_swap_sorter.h
+FILENAMES_HEADERS = push_swap.h push_swap_sorter.h push_swap_bonus.h
 HEADERS = $(addprefix ./includes/,$(FILENAMES_HEADERS))
 NAME = push_swap
 BONUS_NAME = checker

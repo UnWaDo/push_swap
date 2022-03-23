@@ -1,5 +1,5 @@
-#ifndef H_PUSH_SWAP_SORTER
-# define H_PUSH_SWAP_SORTER
+#ifndef PUSH_SWAP_SORTER_H
+# define PUSH_SWAP_SORTER_H
 
 # include "push_swap.h"
 
