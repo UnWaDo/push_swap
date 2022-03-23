@@ -6,7 +6,7 @@
 /*   By: lalex <lalex@students.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:54:12 by lalex             #+#    #+#             */
-/*   Updated: 2022/03/23 16:54:12 by lalex            ###   ########.fr       */
+/*   Updated: 2022/03/23 17:40:51 by lalex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,59 @@ int	is_value_valid(char *value, int *result, t_stack *stack)
 	return (1);
 }
 
-t_stack	*read_stack(int len, char **values)
+static int	read_argument(char *arg, t_stack **s)
 {
-	t_stack	*stack;
 	t_stack	*new;
 	int		v;
 
-	stack = NULL;
-	while (len--)
-	{
-		new = NULL;
-		if (!is_value_valid(values[len], &v, stack))
-			break ;
-		new = stack_new(v);
-		if (new == NULL)
-			break ;
-		stack_append(&stack, new);
-	}
+	if (!is_value_valid(arg, &v, *s))
+		return (-1);
+	new = stack_new(v);
 	if (new == NULL)
+		return (-1);
+	stack_append(s, new);
+	return (0);
+}
+
+static void	clear_strings(char **strings)
+{
+	int	i;
+
+	i = 0;
+	while (strings[i])
+	{
+		free(strings[i]);
+		i++;
+	}
+	free(strings);
+}
+
+t_stack	*read_stack(int len, char **values)
+{
+	t_stack	*stack;
+	int		status;
+	char	**splitted;
+	int		i;
+
+	stack = NULL;
+	status = 0;
+	while (len-- && status == 0)
+	{
+		splitted = ft_split(values[len], ' ');
+		if (splitted == 0)
+		{
+			status = -1;
+			break ;
+		}
+		i = 0;
+		while (splitted[i] && status == 0)
+		{
+			status = read_argument(splitted[i], &stack);
+			i++;
+		}
+		clear_strings(splitted);
+	}
+	if (status != 0)
 		stack_clear(&stack);
 	return (stack);
 }
