@@ -21,7 +21,7 @@ do
     let v+=t
     cat output | ./checker_linux $ARG >> oficial
     echo $t >> oficial
-    # cat output | ./checker $ARG >> self_made
+    cat output | ./checker $ARG >> self_made
 done
 let v/=$len
 if [[ $(grep "KO" oficial) == "" ]]; then
@@ -29,6 +29,11 @@ if [[ $(grep "KO" oficial) == "" ]]; then
     echo "Minimal: $min"
     echo "Maximum: $max"
     echo "Average: $v"
+    if [[ $(grep "KO" self_made) == "" ]]; then
+        echo "Checker OK"
+    else
+        echo "Checker KO"
+    fi
 else
     echo "KO"
 fi

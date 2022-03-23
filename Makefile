@@ -1,19 +1,24 @@
-SOURCES_GENERAL = stack_utils.c stack_utils_add.c stack_operations.c \
+FILENAMES_GENERAL = stack_utils.c stack_utils_add.c stack_operations.c \
 	sort_utils.c ft_strtol.c process_input.c
-SOURCES = main.c sorter.c sorter_utils.c $(SOURCES_GENERAL) \
+FILENAMES = main.c sorter.c sorter_utils.c \
 	ps_pushes.c ps_rotations.c ps_rrotations.c ps_swaps.c
-SOURCES_BONUS = main_bonus.c $(SOURCES_GENERAL)
-SOURCES_VISUAL = visual.c $(SOURCES_GENERAL)
+FILENAMES_BONUS = main_bonus.c
+FILENAMES_VISUAL = visual.c
+SOURCES_GENERAL = $(addprefix ./srcs/general/,$(FILENAMES_GENERAL))
+SOURCES = $(addprefix ./srcs/main/,$(FILENAMES)) $(SOURCES_GENERAL)
+SOURCES_BONUS = $(addprefix ./srcs/bonus/,$(FILENAMES_BONUS)) $(SOURCES_GENERAL)
+SOURCES_VISUAL = $(addprefix ./srcs/visual/,$(FILENAMES_VISUAL)) $(SOURCES_GENERAL)
 PRINTF_PATH = ./ft_printf
 PRINTF = $(PRINTF_PATH)/libftprintf.a
-HEADERS = push_swap.h
+FILENAMES_HEADERS = push_swap.h push_swap_sorter.h
+HEADERS = $(addprefix ./includes/,$(FILENAMES_HEADERS))
 NAME = push_swap
 BONUS_NAME = checker
 VISUAL_NAME = visualize
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 OBJECTS_VISUAL = $(SOURCES_VISUAL:.c=.o)
-INCLUDE_PATH = $(PRINTF_PATH) $(PRINTF_PATH)/libft
+INCLUDE_PATH = ./includes/ $(PRINTF_PATH) $(PRINTF_PATH)/libft
 CFLAGS = -Wall -Wextra -Werror $(addprefix -I,$(INCLUDE_PATH)) -fsanitize=address -g
 .PHONY: all clean fclean re bonus norm visual
 
@@ -51,4 +56,7 @@ $(VISUAL_NAME): $(PRINTF) $(OBJECTS_VISUAL)
 re: fclean all
 
 norm:
-	norminette $(SOURCES) $(HEADERS)
+	@norminette $(SOURCES)
+	@norminette $(SOURCES_BONUS)
+	@norminette $(SOURCES_VISUAL)
+	@norminette $(HEADERS)
