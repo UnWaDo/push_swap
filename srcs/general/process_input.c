@@ -6,7 +6,7 @@
 /*   By: lalex <lalex@students.21-school.ru>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:54:12 by lalex             #+#    #+#             */
-/*   Updated: 2022/03/23 17:40:51 by lalex            ###   ########.fr       */
+/*   Updated: 2022/03/23 17:50:21 by lalex            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,34 @@ static void	clear_strings(char **strings)
 	free(strings);
 }
 
+static int	args_len(char **strings)
+{
+	int	len;
+
+	len = 0;
+	while (strings[len])
+		len++;
+	return (len);
+}
+
 t_stack	*read_stack(int len, char **values)
 {
 	t_stack	*stack;
 	int		status;
 	char	**splitted;
-	int		i;
+	int		splt_len;
 
 	stack = NULL;
 	status = 0;
 	while (len-- && status == 0)
 	{
+		status = -1;
 		splitted = ft_split(values[len], ' ');
-		if (splitted == 0)
-		{
-			status = -1;
+		if (!splitted)
 			break ;
-		}
-		i = 0;
-		while (splitted[i] && status == 0)
-		{
-			status = read_argument(splitted[i], &stack);
-			i++;
-		}
+		splt_len = args_len(splitted);
+		while (splt_len--)
+			status = read_argument(splitted[splt_len], &stack);
 		clear_strings(splitted);
 	}
 	if (status != 0)

@@ -21,7 +21,7 @@ OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 OBJECTS_VISUAL = $(SOURCES_VISUAL:.c=.o)
 INCLUDE_PATH = ./includes/ $(PRINTF_PATH) $(PRINTF_PATH)/libft
-CFLAGS = -Wall -Wextra -Werror $(addprefix -I,$(INCLUDE_PATH)) -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror $(addprefix -I,$(INCLUDE_PATH))
 .PHONY: all clean fclean re bonus norm visual
 
 $(NAME): $(PRINTF) $(OBJECTS)
